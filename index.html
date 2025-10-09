@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>GET $100 FREE — NC Wallet</title>
+<style>
+:root{
+  --bg:#ffd500;
+  --text:#000;
+  --button-bg:#000;
+  --button-text:#ffd500;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  background:#fff;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.card{
+  width:100%;
+  max-width:1100px;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  text-align:center;
+}
+.banner{
+  background:var(--bg);
+  padding:35px 20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+}
+.headline{
+  font-weight:900;
+  font-size:clamp(48px,12vw,140px);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--text);
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);text-shadow:0 0 8px rgba(0,0,0,.25);}
+  50%{transform:scale(1.18);text-shadow:0 0 25px rgba(0,0,0,.4);}
+}
+.pulsing{animation:pulse 0.8s ease-in-out infinite;}
+.sub{
+  font-weight:800;
+  font-size:clamp(18px,4vw,34px);
+  text-transform:uppercase;
+}
+.emoji{font-size:clamp(44px,10vw,140px);line-height:1;}
+@keyframes flashFinger{
+  0%,50%,100%{opacity:1;}
+  25%,75%{opacity:0;}
+}
+.rapid{animation:flashFinger .25s steps(1,start) infinite;}
+.bag-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  margin:12px 0;
+  padding:22px 32px;
+  border-radius:16px;
+  background:var(--button-bg);
+  color:var(--button-text);
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:clamp(18px,4vw,30px);
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.info{
+  padding:28px;
+  background:#fff;
+  color:#000;
+  text-align:center;
+}
+.limit{
+  font-weight:900;
+  font-size:clamp(20px,3.2vw,38px);
+  color:#bb0011;
+}
+.timer{
+  font-weight:900;
+  font-size:clamp(22px,4.8vw,48px);
+  background:#000;
+  color:#ffd500;
+  padding:14px 20px;
+  border-radius:12px;
+  min-width:340px;
+  display:inline-block;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:1px;
+}
+@media(max-width:420px){
+  .bag-link{width:95%;justify-content:center;}
+  .timer{min-width:260px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .pulsing,.rapid{animation:none;}
+}
+</style>
+</head>
+<body>
+<main class="card">
+  <section class="banner">
+    <div class="headline pulsing">GET $100 FREE</div>
+    <div class="sub">FREE NC WALLET</div>
+    <div class="sub">JUST CLICK — AND DOWNLOAD</div>
+    <div>
+      <span class="emoji">💰</span><br/>
+      <a class="bag-link" href="https://ncwallet.net/invite-app/QHFE58A7" target="_blank" rel="noopener noreferrer">
+        CLICK BAG NOW
+      </a><br/>
+      <span class="emoji rapid">👆</span>
+    </div>
+  </section>
+
+  <section class="info">
+    <div class="limit">LIMITED TIME OFFER ENDS OCTOBER 31, 2025</div>
+    <div id="timer" class="timer">00:00:00.000</div>
+  </section>
+</main>
+
+<script>
+const endDate = new Date("October 31, 2025 23:59:59").getTime();
+const timerEl = document.getElementById("timer");
+
+function pad(n, s = 2){let t = String(n);while(t.length < s)t = "0" + t;return t;}
+
+function update(){
+  const now = Date.now();
+  let diff = endDate - now;
+  if(diff < 0) diff = 0;
+
+  const d = Math.floor(diff / 86400000),
+        h = Math.floor(diff % 86400000 / 3600000),
+        m = Math.floor(diff % 3600000 / 60000),
+        s = Math.floor(diff % 60000 / 1000),
+        ms = diff % 1000;
+
+  timerEl.textContent = `${pad(d,2)}d ${pad(h,2)}:${pad(m,2)}:${pad(s,2)}.${pad(ms,3)}`;
+  requestAnimationFrame(update);
+}
+
+requestAnimationFrame(update);
+</script>
+</body>
+</html>
